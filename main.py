@@ -53,10 +53,20 @@ def generate_qr_code(url, output_dir='qr_codes'):
 
 def main():
     """Main function to parse arguments and generate QR code."""
+    
+    # ----------------------------
+    # Read environment variables with defaults
+    # ----------------------------
+    env_url = os.getenv("QR_URL", "http://github.com/kaw393939")
+    env_output = os.getenv("QR_OUTPUT_DIR", "qr_codes")
+    
+    # ----------------------------
+    # Parse CLI arguments (override env if provided)
+    # ----------------------------
     parser = argparse.ArgumentParser(description='Generate QR codes from URLs')
-    parser.add_argument('--url', type=str, default='http://github.com/kaw393939',
+    parser.add_argument('--url', type=str, default=env_url,
                         help='URL to encode in QR code')
-    parser.add_argument('--output', type=str, default='qr_codes',
+    parser.add_argument('--output', type=str, default=env_output,
                         help='Output directory for QR codes')
     
     args = parser.parse_args()
